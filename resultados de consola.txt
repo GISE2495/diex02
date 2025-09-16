@@ -1,0 +1,186 @@
+
+> # bloques: 3
+> # tratamientos: 9
+> 
+> library(agricolae)
+
+> # -------------------------------------------------------------------------
+> # dbca --------------------------------------------------------------- .... [TRUNCATED] 
+
+> ds<- agricolae::design.rcbd(trt = tratamientos, r = 4)
+
+> str(ds)
+List of 3
+ $ parameters:List of 7
+  ..$ design: chr "rcbd"
+  ..$ trt   : chr [1:9] "testigo absoluto" "cp 10-3 + dosis 1" "cp 53-2 + dosis 1" "cp 24-6 + dosis 1" ...
+  ..$ r     : num 4
+  ..$ serie : num 2
+  ..$ seed  : int -55477721
+  ..$ kinds : chr "Super-Duper"
+  ..$       : logi TRUE
+ $ sketch    : chr [1:4, 1:9] "cp 53-2 + dosis 1" "cp 10-3 + dosis 2" "testigo absoluto" "cp 24-6 + dosis 1" ...
+ $ book      :'data.frame':	36 obs. of  3 variables:
+  ..$ plots       : num [1:36] 101 102 103 104 105 106 107 108 109 201 ...
+  ..$ block       : Factor w/ 4 levels "1","2","3","4": 1 1 1 1 1 1 1 1 1 2 ...
+  ..$ tratamientos: Factor w/ 9 levels "cp 10-3 + dosis 1",..: 7 6 8 4 5 2 3 1 9 2 ...
+
+> fb <- ds$book
+
+> fb
+   plots block      tratamientos
+1    101     1 cp 53-2 + dosis 1
+2    102     1 cp 38-2 + dosis 2
+3    103     1 cp 53-2 + dosis 2
+4    104     1 cp 24-6 + dosis 2
+5    105     1 cp 38-2 + disis 1
+6    106     1 cp 10-3 + dosis 2
+7    107     1 cp 24-6 + dosis 1
+8    108     1 cp 10-3 + dosis 1
+9    109     1  testigo absoluto
+10   201     2 cp 10-3 + dosis 2
+11   202     2  testigo absoluto
+12   203     2 cp 24-6 + dosis 1
+13   204     2 cp 38-2 + dosis 2
+14   205     2 cp 10-3 + dosis 1
+15   206     2 cp 38-2 + disis 1
+16   207     2 cp 24-6 + dosis 2
+17   208     2 cp 53-2 + dosis 2
+18   209     2 cp 53-2 + dosis 1
+19   301     3  testigo absoluto
+20   302     3 cp 10-3 + dosis 2
+21   303     3 cp 53-2 + dosis 1
+22   304     3 cp 24-6 + dosis 2
+23   305     3 cp 38-2 + disis 1
+24   306     3 cp 53-2 + dosis 2
+25   307     3 cp 10-3 + dosis 1
+26   308     3 cp 38-2 + dosis 2
+27   309     3 cp 24-6 + dosis 1
+28   401     4 cp 24-6 + dosis 1
+29   402     4 cp 53-2 + dosis 2
+30   403     4  testigo absoluto
+31   404     4 cp 53-2 + dosis 1
+32   405     4 cp 24-6 + dosis 2
+33   406     4 cp 10-3 + dosis 1
+34   407     4 cp 38-2 + dosis 2
+35   408     4 cp 10-3 + dosis 2
+36   409     4 cp 38-2 + disis 1
+
+> fieldbook <- zigzag(ds)
+
+> fieldbook
+   plots block      tratamientos
+1    101     1 cp 53-2 + dosis 1
+2    102     1 cp 38-2 + dosis 2
+3    103     1 cp 53-2 + dosis 2
+4    104     1 cp 24-6 + dosis 2
+5    105     1 cp 38-2 + disis 1
+6    106     1 cp 10-3 + dosis 2
+7    107     1 cp 24-6 + dosis 1
+8    108     1 cp 10-3 + dosis 1
+9    109     1  testigo absoluto
+10   209     2 cp 10-3 + dosis 2
+11   208     2  testigo absoluto
+12   207     2 cp 24-6 + dosis 1
+13   206     2 cp 38-2 + dosis 2
+14   205     2 cp 10-3 + dosis 1
+15   204     2 cp 38-2 + disis 1
+16   203     2 cp 24-6 + dosis 2
+17   202     2 cp 53-2 + dosis 2
+18   201     2 cp 53-2 + dosis 1
+19   301     3  testigo absoluto
+20   302     3 cp 10-3 + dosis 2
+21   303     3 cp 53-2 + dosis 1
+22   304     3 cp 24-6 + dosis 2
+23   305     3 cp 38-2 + disis 1
+24   306     3 cp 53-2 + dosis 2
+25   307     3 cp 10-3 + dosis 1
+26   308     3 cp 38-2 + dosis 2
+27   309     3 cp 24-6 + dosis 1
+28   409     4 cp 24-6 + dosis 1
+29   408     4 cp 53-2 + dosis 2
+30   407     4  testigo absoluto
+31   406     4 cp 53-2 + dosis 1
+32   405     4 cp 24-6 + dosis 2
+33   404     4 cp 10-3 + dosis 1
+34   403     4 cp 38-2 + dosis 2
+35   402     4 cp 10-3 + dosis 2
+36   401     4 cp 38-2 + disis 1
+
+> print(ds$sketch)
+     [,1]                [,2]                [,3]               
+[1,] "cp 53-2 + dosis 1" "cp 38-2 + dosis 2" "cp 53-2 + dosis 2"
+[2,] "cp 10-3 + dosis 2" "testigo absoluto"  "cp 24-6 + dosis 1"
+[3,] "testigo absoluto"  "cp 10-3 + dosis 2" "cp 53-2 + dosis 1"
+[4,] "cp 24-6 + dosis 1" "cp 53-2 + dosis 2" "testigo absoluto" 
+     [,4]                [,5]                [,6]               
+[1,] "cp 24-6 + dosis 2" "cp 38-2 + disis 1" "cp 10-3 + dosis 2"
+[2,] "cp 38-2 + dosis 2" "cp 10-3 + dosis 1" "cp 38-2 + disis 1"
+[3,] "cp 24-6 + dosis 2" "cp 38-2 + disis 1" "cp 53-2 + dosis 2"
+[4,] "cp 53-2 + dosis 1" "cp 24-6 + dosis 2" "cp 10-3 + dosis 1"
+     [,7]                [,8]                [,9]               
+[1,] "cp 24-6 + dosis 1" "cp 10-3 + dosis 1" "testigo absoluto" 
+[2,] "cp 24-6 + dosis 2" "cp 53-2 + dosis 2" "cp 53-2 + dosis 1"
+[3,] "cp 10-3 + dosis 1" "cp 38-2 + dosis 2" "cp 24-6 + dosis 1"
+[4,] "cp 38-2 + dosis 2" "cp 10-3 + dosis 2" "cp 38-2 + disis 1"
+> source("C:/Proyectos/diex02/trabajo02.R")
+List of 3
+ $ parameters:List of 7
+  ..$ design: chr "rcbd"
+  ..$ trt   : chr [1:9] "testigo absoluto" "cp 10-3 + dosis 1" "cp 53-2 + dosis 1" "cp 24-6 + dosis 1" ...
+  ..$ r     : num 4
+  ..$ serie : num 2
+  ..$ seed  : int 691516479
+  ..$ kinds : chr "Super-Duper"
+  ..$       : logi TRUE
+ $ sketch    : chr [1:4, 1:9] "cp 38-2 + dosis 2" "cp 38-2 + dosis 2" "cp 24-6 + dosis 1" "testigo absoluto" ...
+ $ book      :'data.frame':	36 obs. of  3 variables:
+  ..$ plots       : num [1:36] 101 102 103 104 105 106 107 108 109 201 ...
+  ..$ block       : Factor w/ 4 levels "1","2","3","4": 1 1 1 1 1 1 1 1 1 2 ...
+  ..$ tratamientos: Factor w/ 9 levels "cp 10-3 + dosis 1",..: 6 1 9 5 2 4 8 7 3 6 ...
+     [,1]                [,2]                [,3]               
+[1,] "cp 38-2 + dosis 2" "cp 10-3 + dosis 1" "testigo absoluto" 
+[2,] "cp 38-2 + dosis 2" "cp 38-2 + disis 1" "cp 10-3 + dosis 2"
+[3,] "cp 24-6 + dosis 1" "cp 53-2 + dosis 2" "cp 24-6 + dosis 2"
+[4,] "testigo absoluto"  "cp 10-3 + dosis 1" "cp 53-2 + dosis 1"
+     [,4]                [,5]                [,6]               
+[1,] "cp 38-2 + disis 1" "cp 10-3 + dosis 2" "cp 24-6 + dosis 2"
+[2,] "testigo absoluto"  "cp 53-2 + dosis 2" "cp 53-2 + dosis 1"
+[3,] "cp 10-3 + dosis 1" "cp 53-2 + dosis 1" "cp 38-2 + dosis 2"
+[4,] "cp 38-2 + dosis 2" "cp 24-6 + dosis 2" "cp 53-2 + dosis 2"
+     [,7]                [,8]                [,9]               
+[1,] "cp 53-2 + dosis 2" "cp 53-2 + dosis 1" "cp 24-6 + dosis 1"
+[2,] "cp 24-6 + dosis 1" "cp 10-3 + dosis 1" "cp 24-6 + dosis 2"
+[3,] "testigo absoluto"  "cp 10-3 + dosis 2" "cp 38-2 + disis 1"
+[4,] "cp 38-2 + disis 1" "cp 24-6 + dosis 1" "cp 10-3 + dosis 2"
+> source("C:/Proyectos/diex02/trabajo02.R")
+List of 3
+ $ parameters:List of 7
+  ..$ design: chr "rcbd"
+  ..$ trt   : chr [1:9] "testigo absoluto" "cp 10-3 + dosis 1" "cp 53-2 + dosis 1" "cp 24-6 + dosis 1" ...
+  ..$ r     : num 4
+  ..$ serie : num 2
+  ..$ seed  : int -1043013437
+  ..$ kinds : chr "Super-Duper"
+  ..$       : logi TRUE
+ $ sketch    : chr [1:4, 1:9] "testigo absoluto" "cp 10-3 + dosis 2" "cp 10-3 + dosis 1" "cp 24-6 + dosis 1" ...
+ $ book      :'data.frame':	36 obs. of  3 variables:
+  ..$ plots       : num [1:36] 101 102 103 104 105 106 107 108 109 201 ...
+  ..$ block       : Factor w/ 4 levels "1","2","3","4": 1 1 1 1 1 1 1 1 1 2 ...
+  ..$ tratamientos: Factor w/ 9 levels "cp 10-3 + dosis 1",..: 9 6 8 7 4 1 2 5 3 2 ...
+     [,1]                [,2]                [,3]               
+[1,] "testigo absoluto"  "cp 38-2 + dosis 2" "cp 53-2 + dosis 2"
+[2,] "cp 10-3 + dosis 2" "cp 38-2 + dosis 2" "cp 24-6 + dosis 2"
+[3,] "cp 10-3 + dosis 1" "cp 10-3 + dosis 2" "cp 24-6 + dosis 1"
+[4,] "cp 24-6 + dosis 1" "cp 10-3 + dosis 2" "cp 38-2 + dosis 2"
+     [,4]                [,5]                [,6]               
+[1,] "cp 53-2 + dosis 1" "cp 24-6 + dosis 2" "cp 10-3 + dosis 1"
+[2,] "cp 24-6 + dosis 1" "cp 53-2 + dosis 1" "cp 10-3 + dosis 1"
+[3,] "cp 24-6 + dosis 2" "cp 53-2 + dosis 2" "cp 38-2 + disis 1"
+[4,] "cp 53-2 + dosis 2" "cp 53-2 + dosis 1" "testigo absoluto" 
+     [,7]                [,8]                [,9]               
+[1,] "cp 10-3 + dosis 2" "cp 38-2 + disis 1" "cp 24-6 + dosis 1"
+[2,] "cp 38-2 + disis 1" "testigo absoluto"  "cp 53-2 + dosis 2"
+[3,] "cp 38-2 + dosis 2" "testigo absoluto"  "cp 53-2 + dosis 1"
+[4,] "cp 38-2 + disis 1" "cp 10-3 + dosis 1" "cp 24-6 + dosis 2"
+> 
